@@ -4,7 +4,7 @@ import path from "path";
 import { componentTagger } from "lovable-tagger";
 
 export default defineConfig(({ mode }) => ({
-  base: "/site-mouvprint/",
+  base: "/site-mouvprint/", // 🔥 IMPORTANT
 
   server: {
     host: "::",
