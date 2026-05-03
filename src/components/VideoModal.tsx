@@ -1,6 +1,5 @@
 import { useEffect } from "react";
 import { X } from "lucide-react";
-import demoMp4 from "@/assets/demo.mp4";
 
 interface VideoModalProps {
   open: boolean;
@@ -12,10 +11,12 @@ const VideoModal = ({ open, onClose }: VideoModalProps) => {
     const onKey = (e: KeyboardEvent) => {
       if (e.key === "Escape") onClose();
     };
+
     if (open) {
       document.body.style.overflow = "hidden";
       window.addEventListener("keydown", onKey);
     }
+
     return () => {
       document.body.style.overflow = "";
       window.removeEventListener("keydown", onKey);
@@ -32,7 +33,7 @@ const VideoModal = ({ open, onClose }: VideoModalProps) => {
       onClick={onClose}
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 md:p-8 animate-fade-in"
     >
-      {/* Backdrop */}
+      {/* Background flou */}
       <div className="absolute inset-0 bg-background/80 backdrop-blur-2xl" />
 
       {/* Modal */}
@@ -40,6 +41,7 @@ const VideoModal = ({ open, onClose }: VideoModalProps) => {
         onClick={(e) => e.stopPropagation()}
         className="relative w-full max-w-5xl glass-strong rounded-3xl overflow-hidden border border-white/15 shadow-neon animate-scale-in"
       >
+        {/* Bouton fermer */}
         <button
           type="button"
           onClick={onClose}
@@ -49,13 +51,17 @@ const VideoModal = ({ open, onClose }: VideoModalProps) => {
           <X className="w-5 h-5" />
         </button>
 
+        {/* Vidéo */}
         <div className="aspect-video bg-black">
           <video
             controls
             autoPlay
-            src={demoMp4}
             className="h-full w-full"
           >
+            <source
+              src={`${import.meta.env.BASE_URL}videos/demo.mp4`}
+              type="video/mp4"
+            />
             Votre navigateur ne supporte pas la lecture vidéo.
           </video>
         </div>
